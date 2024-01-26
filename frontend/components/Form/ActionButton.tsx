@@ -1,5 +1,5 @@
-import { Button, makeStyles } from '@material-ui/core';
-import React from 'react';
+import { Button, makeStyles } from "@material-ui/core";
+import React from "react";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -7,27 +7,27 @@ const useStyles = makeStyles((theme) => ({
     margin: theme.spacing(0.5),
   },
   primary: {
-    backgroundColor: theme.palette.primary.dark + '26', //'#3c44b126'
-    '& .MuiButton-label': {
+    backgroundColor: "#99BC85",
+    "& .MuiButton-label": {
       color: theme.palette.primary.dark,
     },
   },
   secondary: {
-    backgroundColor: theme.palette.error.main + '26', //'#f8324526'
-    '& .MuiButton-label': {
+    backgroundColor: theme.palette.error.main + "26", //'#f8324526'
+    "& .MuiButton-label": {
       color: theme.palette.error.main,
     },
   },
   success: {
-    backgroundColor: theme.palette.success.main + '26',
-    '& .MuiButton-label': {
+    backgroundColor: theme.palette.success.main + "26",
+    "& .MuiButton-label": {
       color: theme.palette.success.main,
     },
   },
 }));
 
 interface Props {
-  color: 'primary' | 'secondary' | 'success';
+  color: "primary" | "secondary" | "success";
   children: React.ReactNode;
   onClick?: VoidFunction;
 }

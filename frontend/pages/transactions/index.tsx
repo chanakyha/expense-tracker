@@ -5,28 +5,30 @@ import {
   makeStyles,
   Paper,
   Typography,
-} from '@material-ui/core';
-import { Add, AttachMoney, Search } from '@material-ui/icons';
-import React, { useState } from 'react';
-import { useSelector } from 'react-redux';
-import ExpenseTable from '../../components/ExpenseTable/index';
-import Forbidden from '../../components/Forbidden';
-import LoadingCircle from '../../components/Form/LoadingCircle';
-import SubmitButton from '../../components/Form/SubmitButton';
-import useInput from '../../components/Form/useInput';
-import useSelect from '../../components/Form/useSelect';
-import useDialog from '../../components/useDialog';
-import useLoading from '../../components/useLoading';
-import useSnackbar from '../../components/useSnackbar';
-import { selectAccount } from '../../redux/slices/account';
+} from "@material-ui/core";
+import CurrencyRupeeIcon from "@mui/icons-material/CurrencyRupee";
+import { Add, AttachMoney, Search } from "@material-ui/icons";
+
+import React, { useState } from "react";
+import { useSelector } from "react-redux";
+import ExpenseTable from "../../components/ExpenseTable/index";
+import Forbidden from "../../components/Forbidden";
+import LoadingCircle from "../../components/Form/LoadingCircle";
+import SubmitButton from "../../components/Form/SubmitButton";
+import useInput from "../../components/Form/useInput";
+import useSelect from "../../components/Form/useSelect";
+import useDialog from "../../components/useDialog";
+import useLoading from "../../components/useLoading";
+import useSnackbar from "../../components/useSnackbar";
+import { selectAccount } from "../../redux/slices/account";
 import {
   selectTransactions,
   transactionsActions,
-} from '../../redux/slices/transactions';
-import { selectUser } from '../../redux/slices/user';
-import { useAppDispatch } from '../../redux/store';
-import { Transaction } from '../../redux/types';
-import { dateToFormString } from '../../utils/dateToString';
+} from "../../redux/slices/transactions";
+import { selectUser } from "../../redux/slices/user";
+import { useAppDispatch } from "../../redux/store";
+import { Transaction } from "../../redux/types";
+import { dateToFormString } from "../../utils/dateToString";
 
 const useStyles = makeStyles((theme) => ({
   toolbar: {
@@ -36,7 +38,7 @@ const useStyles = makeStyles((theme) => ({
     padding: theme.spacing(3),
   },
   form: {
-    width: '100%',
+    width: "100%",
     marginTop: theme.spacing(1),
   },
 }));
@@ -51,8 +53,8 @@ const Transactions: React.FC = () => {
   const [editMode, setEditMode] = useState(false);
 
   const typeOptions = [
-    { value: 'expense', label: 'Expense' },
-    { value: 'revenue', label: 'Revenue' },
+    { value: "expense", label: "Expense" },
+    { value: "revenue", label: "Revenue" },
   ];
 
   const categoryOptions = account.categories.map((element) => ({
@@ -61,8 +63,8 @@ const Transactions: React.FC = () => {
   }));
 
   const [search, searchProps, SearchInput] = useInput(
-    'Search Transactions',
-    'text'
+    "Search Transactions",
+    "text"
   );
 
   const filteredTransactions = transactions.filter((transaction) => {
@@ -73,45 +75,36 @@ const Transactions: React.FC = () => {
     );
   });
 
-  const [
-    handleOpenDialog,
-    dialogProps,
-    ExpenseDialog,
-    handleCloseDialog,
-  ] = useDialog('Create New Transaction', true);
-  const [title, titleProps, TitleInput, , setTitle] = useInput('Name');
+  const [handleOpenDialog, dialogProps, ExpenseDialog, handleCloseDialog] =
+    useDialog("Create New Transaction", true);
+  const [title, titleProps, TitleInput, , setTitle] = useInput("Name");
   const [amount, amountProps, AmountInput, , setAmount] = useInput(
-    'Amount',
-    'number'
+    "Amount",
+    "number"
   );
-  const [
-    description,
-    descriptionProps,
-    DescriptionInput,
-    ,
-    setDescription,
-  ] = useInput('Description');
+  const [description, descriptionProps, DescriptionInput, , setDescription] =
+    useInput("Description");
   const [type, typeProps, TypeInput, setType] = useSelect(
-    'Type',
-    'type-select',
+    "Type",
+    "type-select",
     typeOptions
   );
   const [category, categoryProps, CategoryInput, setCategory] = useSelect(
-    'Category',
-    'category-select',
+    "Category",
+    "category-select",
     categoryOptions
   );
-  const [date, dateProps, DateInput, , setDate] = useInput('Date', 'date');
+  const [date, dateProps, DateInput, , setDate] = useInput("Date", "date");
 
-  const [id, setId] = useState('');
+  const [id, setId] = useState("");
 
   const handleFormReset = () => {
-    setTitle('');
-    setAmount('');
-    setDescription('');
-    setType('');
-    setCategory('');
-    setDate('');
+    setTitle("");
+    setAmount("");
+    setDescription("");
+    setType("");
+    setCategory("");
+    setDate("");
   };
 
   const handleEdit = (transaction: Transaction) => {
@@ -131,7 +124,7 @@ const Transactions: React.FC = () => {
     ids: string[],
     setSelected: React.Dispatch<React.SetStateAction<string[]>>
   ) => {
-    const jwt = localStorage.getItem('jwt');
+    const jwt = localStorage.getItem("jwt");
     if (!jwt) return;
 
     try {
@@ -149,13 +142,13 @@ const Transactions: React.FC = () => {
     e.preventDefault();
     handleFormReset();
     handleCloseDialog();
-    const jwt = localStorage.getItem('jwt');
+    const jwt = localStorage.getItem("jwt");
     if (!jwt) return;
     const transaction: Transaction = {
       title,
       amount: Number(amount),
       description,
-      type: type as 'expense' | 'revenue',
+      type: type as "expense" | "revenue",
       category,
       date,
       _id: id,
@@ -185,23 +178,14 @@ const Transactions: React.FC = () => {
   const [deleteLoading, doDelete] = useLoading(handleDelete);
   const loading = createLoading || deleteLoading;
 
-  const [
-    openCreateSuccess,
-    createSuccessProps,
-    CreateSuccessSnackbar,
-  ] = useSnackbar('Successfully created new transaction');
+  const [openCreateSuccess, createSuccessProps, CreateSuccessSnackbar] =
+    useSnackbar("Successfully created new transaction");
 
-  const [
-    openUpdateSuccess,
-    updateSuccessProps,
-    UpdateSuccessSnackbar,
-  ] = useSnackbar('Successfully updated transaction');
+  const [openUpdateSuccess, updateSuccessProps, UpdateSuccessSnackbar] =
+    useSnackbar("Successfully updated transaction");
 
-  const [
-    openDeleteSuccess,
-    deleteSuccessProps,
-    DeleteSuccessSnackbar,
-  ] = useSnackbar('Successfully deleted transaction(s)');
+  const [openDeleteSuccess, deleteSuccessProps, DeleteSuccessSnackbar] =
+    useSnackbar("Successfully deleted transaction(s)");
 
   return (
     <>
@@ -262,7 +246,7 @@ const Transactions: React.FC = () => {
                     InputProps={{
                       startAdornment: (
                         <InputAdornment position="start">
-                          <AttachMoney />
+                          <CurrencyRupeeIcon />
                         </InputAdornment>
                       ),
                     }}
@@ -285,7 +269,7 @@ const Transactions: React.FC = () => {
                   />
                 </Grid>
                 <Grid item xs={12}>
-                  <SubmitButton>{editMode ? 'Update' : 'Create'}</SubmitButton>
+                  <SubmitButton>{editMode ? "Update" : "Create"}</SubmitButton>
                 </Grid>
               </Grid>
             </form>

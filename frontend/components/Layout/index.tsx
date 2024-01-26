@@ -1,22 +1,22 @@
-import { makeStyles } from '@material-ui/core';
-import Container from '@material-ui/core/Container';
-import 'fontsource-roboto';
-import Head from 'next/head';
-import React, { useEffect } from 'react';
-import { useSelector } from 'react-redux';
-import { accountActions } from '../../redux/slices/account';
-import { transactionsActions } from '../../redux/slices/transactions';
-import { selectUser, userActions } from '../../redux/slices/user';
-import { useAppDispatch } from '../../redux/store';
-import Header from './Header/index';
-import SideNav from './SideNav';
+import { makeStyles } from "@material-ui/core";
+import Container from "@material-ui/core/Container";
+import "fontsource-roboto";
+import Head from "next/head";
+import React, { useEffect } from "react";
+import { useSelector } from "react-redux";
+import { accountActions } from "../../redux/slices/account";
+import { transactionsActions } from "../../redux/slices/transactions";
+import { selectUser, userActions } from "../../redux/slices/user";
+import { useAppDispatch } from "../../redux/store";
+import Header from "./Header/index";
+import SideNav from "./SideNav";
 
 export const drawerWidth = 240;
 
 const useStyles = makeStyles((theme) => ({
   toolbar: theme.mixins.toolbar,
   root: {
-    display: 'flex',
+    display: "flex",
   },
   content: {
     flexGrow: 1,
@@ -32,14 +32,14 @@ const Layout: React.FC = ({ children }) => {
 
   // fetch user on start
   useEffect(() => {
-    const jwt = localStorage.getItem('jwt');
+    const jwt = localStorage.getItem("jwt");
     if (!jwt) return;
     dispatch(userActions.fetchUserByJWT(jwt));
   }, []);
 
   // fetch account and transactions on user change
   useEffect(() => {
-    const jwt = localStorage.getItem('jwt');
+    const jwt = localStorage.getItem("jwt");
     if (!user.loggedIn || !jwt) return;
 
     dispatch(accountActions.fetchAccountById({ jwt, _id: user.account }));
@@ -49,7 +49,7 @@ const Layout: React.FC = ({ children }) => {
   return (
     <div className={classes.root}>
       <Head>
-        <title>Expense On Rails</title>
+        <title>WalletWatch</title>
       </Head>
       <Header />
       <SideNav />

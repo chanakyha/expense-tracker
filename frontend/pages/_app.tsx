@@ -1,18 +1,29 @@
-import { AppProps } from 'next/app';
-import store from '../redux/store';
-import { Provider } from 'react-redux';
-import Layout from '../components/Layout';
-import { CssBaseline } from '@material-ui/core';
-import React from "react";
+import { AppProps } from "next/app";
+import store from "../redux/store";
+import { Provider } from "react-redux";
+import Layout from "../components/Layout";
+import { CssBaseline, createMuiTheme } from "@material-ui/core";
+import { ThemeProvider } from "@material-ui/styles";
 
 const App: React.FC<AppProps> = ({ Component, pageProps }) => {
+  const theme = createMuiTheme({
+    typography: {
+      allVariants: {
+        fontFamily: "Montserrat, sans-serif",
+        textTransform: "none",
+        fontWeight: "400",
+      },
+    },
+  });
   return (
-    <Provider store={store}>
-      <CssBaseline />
-      <Layout>
-        <Component {...pageProps} />
-      </Layout>
-    </Provider>
+    <ThemeProvider theme={theme}>
+      <Provider store={store}>
+        <CssBaseline />
+        <Layout>
+          <Component {...pageProps} />
+        </Layout>
+      </Provider>
+    </ThemeProvider>
   );
 };
 

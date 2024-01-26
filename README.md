@@ -1,6 +1,6 @@
-# Expense On Rails
+# WalletWatch
 
-"Expense On Rails" is an expense tracker web-application built with Next.js and Express. The data is persisted by connecting to a MongoDB database. Material-UI was used to create the user interface, with Redux Toolkit employed to manage state.
+"WalletWatch" is an expense tracker web-application built with Next.js and Express. The data is persisted by connecting to a MongoDB database. Material-UI was used to create the user interface, with Redux Toolkit employed to manage state.
 
 Live link here: https://expenseonrails.herokuapp.com/
 

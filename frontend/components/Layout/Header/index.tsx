@@ -1,7 +1,7 @@
-import { AppBar, Toolbar, Typography, makeStyles } from '@material-ui/core';
-import React from 'react';
-import AccountMenu from './AccountMenu';
-import { drawerWidth } from '..';
+import { AppBar, Toolbar, Typography, makeStyles } from "@material-ui/core";
+import React from "react";
+import AccountMenu from "./AccountMenu";
+import { drawerWidth } from "..";
 
 const useStyles = makeStyles((theme) => ({
   menuButton: {
@@ -13,6 +13,8 @@ const useStyles = makeStyles((theme) => ({
   appBar: {
     width: `calc(100% - ${drawerWidth}px)`,
     marginLeft: drawerWidth,
+    backgroundColor: "#99BC85",
+    color: "#000",
   },
 }));
 
@@ -23,7 +25,7 @@ const Header: React.FC = () => {
     <AppBar position="fixed" className={classes.appBar}>
       <Toolbar>
         <Typography variant="h5" className={classes.title}>
-          Expense On Rails
+          WalletWatch
         </Typography>
         <AccountMenu />
       </Toolbar>

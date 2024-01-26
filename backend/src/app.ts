@@ -1,24 +1,26 @@
 // Middleware
-import cookieParser from 'cookie-parser';
-import cors from 'cors';
-import dotenv from 'dotenv';
-import express from 'express';
-import helmet from 'helmet';
-import logger from 'morgan';
-import compression from 'compression';
-import mongoose from 'mongoose';
-import passport from 'passport';
-import passportConfig from './utils/passportConfig';
-import router from './routes/index';
-import './utils/typeExtensions';
+import cookieParser from "cookie-parser";
+import cors from "cors";
+import dotenv from "dotenv";
+import express from "express";
+import helmet from "helmet";
+import logger from "morgan";
+import compression from "compression";
+import mongoose from "mongoose";
+import passport from "passport";
+import passportConfig from "./utils/passportConfig";
+import router from "./routes/index";
+import "./utils/typeExtensions";
 
 // Load .env config file contents
 dotenv.config();
 
+console.log(process.env.MONGO_DB!);
+
 // Environment Variables
 const NODE_ENV = process.env.NODE_ENV;
 const PORT = process.env.PORT || 8000;
-const origin = NODE_ENV === 'production' ? 'TODO' : 'http://localhost:3000'; // TODO: Add production URL
+const origin = NODE_ENV === "production" ? "TODO" : "http://localhost:3000"; // TODO: Add production URL
 const mongoDB = process.env.MONGO_DB!;
 const corsOptions = {
   origin: origin,
@@ -35,10 +37,10 @@ mongoose.connect(mongoDB, {
   useCreateIndex: true,
 });
 const db = mongoose.connection;
-db.on('error', console.error.bind(console, 'MongoDB connection error:'));
+db.on("error", console.error.bind(console, "MongoDB connection error:"));
 
 // Imported Middleware
-app.use(logger('dev'));
+app.use(logger("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
