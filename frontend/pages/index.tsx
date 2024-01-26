@@ -8,10 +8,11 @@ import Link from "next/link";
 
 const Home: React.FC = () => {
   const user = useSelector(selectUser);
+  console.log(user);
 
   return (
     <>
-      {user && (
+      {user.loggedIn != false && (
         <Typography variant="h2">
           Welcome {`${user.firstName} ${user.lastName}`}
         </Typography>
